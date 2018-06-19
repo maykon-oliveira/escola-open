@@ -15,7 +15,7 @@ export class EducacaoDadosAPIService {
     if (nome.length <= 3) {
       throw new Error('Erro: a busca tem que ter mais de 3 (três) caracteres');
     } else {
-      return this.httpClienteService.get(this.URL_BASE_API + `buscaavancada?nome=${nome}`);
+      return this.httpClienteService.get(this.URL_BASE_API + `escolas/buscaavancada?nome=${nome}`);
     }
 
   }
