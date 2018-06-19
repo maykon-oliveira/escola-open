@@ -11,12 +11,18 @@ export class EducacaoDadosAPIService {
   constructor(private httpClienteService: HttpClient) { }
 
   getEscolasByNome(nome: string) {
-
     if (nome.length <= 3) {
       throw new Error('Erro: a busca tem que ter mais de 3 (três) caracteres');
     } else {
       return this.httpClienteService.get(this.URL_BASE_API + `escolas/buscaavancada?nome=${nome}`);
     }
+  }
 
+  getEscolasByEstado(nome: string) {
+    if (nome.length < 2) {
+      throw new Error('Erro: a busca tem que ter mais de 3 (três) caracteres');
+    } else {
+      return this.httpClienteService.get(this.URL_BASE_API + `escolas/buscaavancada?estado=${nome}`);
+    }
   }
 }
