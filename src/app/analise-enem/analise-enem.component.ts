@@ -1,5 +1,6 @@
 import { EducacaoDadosAPIService } from "./../service/educacao-dados-api.service";
 import { Component, OnInit } from "@angular/core";
+import * as d3 from "d3";
 
 @Component({
   selector: "app-analise-enem",
@@ -7,25 +8,30 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./analise-enem.component.css"]
 })
 export class AnaliseEnemComponent implements OnInit {
-  totalNotasEnem = 0;
-  public dados: any[] = [
-    {data: this.totalNotasEnem, label: 'RN'}
-  ];
+
+  dados: any[] = [{ data: [20], label: 'RN' }];
   public tipoGrafico: string = "bar";
 
-  constructor(private api: EducacaoDadosAPIService) {}
+  constructor(private api: EducacaoDadosAPIService) { }
 
   ngOnInit() {
-    this.api.getEscolasByEstado("RN").subscribe(
-      escolasRN => {
-        const lista = escolasRN[1];
-        this.totalNotasEnem = 0;
-        lista.forEach(escola => {
-          this.totalNotasEnem += escola.enemMediaGeral;
-          // this.dados.push( {"data": [50], "label": 'RN'});
-        });
-        console.log(this.totalNotasEnem);
-      }
-    );
+    let estados = ['RN', 'SP'];
+    estados.forEach(estado => {
+      this.api.getEscolasByEstado(estado).subscribe(
+        escolas => {
+          let nota = [];
+          escolas[1].forEach(escola => {
+            nota.push(escola.enemMediaGeral);
+          });
+
+          this.addObjetToList(estado, d3.mean(nota));
+        }
+      );
+    });
+
+  }
+
+  addObjetToList(estado: string, nota: number) {
+    this.dados.push(`{"data": ${nota}, "label": ${estado}}`);
   }
 }
