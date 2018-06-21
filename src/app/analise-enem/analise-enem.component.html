@@ -1,5 +1,5 @@
-<div style="display: block">
+<div>
   <canvas baseChart [datasets]="dados" [chartType]="tipoGrafico">
   </canvas>
 </div>
-{{dados}}
+<button type="button" (click)="chart.chart.update()">Atualizar</button>
