@@ -1,16 +1,16 @@
-import { EducacaoDadosAPIService } from "./../service/educacao-dados-api.service";
+import { EducacaoDadosAPIService } from './../service/educacao-dados-api.service';
 import { Component, OnInit } from '@angular/core';
-import * as d3 from "d3";
+import * as d3 from 'd3';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: "app-analise-enem",
-  templateUrl: "./analise-enem.component.html",
-  styleUrls: ["./analise-enem.component.css"]
+  selector: 'app-analise-enem',
+  templateUrl: './analise-enem.component.html',
+  styleUrls: ['./analise-enem.component.css']
 })
 export class AnaliseEnemComponent implements OnInit {
-  chart = [];
-  tipoGrafico: string = "bar";
+  chart: Chart;
+  tipoGrafico: string = 'bar';
   options = {
     scales: {
       yAxes: [{
@@ -19,7 +19,6 @@ export class AnaliseEnemComponent implements OnInit {
         }
       }]
     },
-    layout: { padding: { left: 10,  right: 10, top: 10, bottom: 10 } },
     title: {
       display: true,
       text: 'Média das notas do ENEM das escolas do Brasil'
@@ -60,12 +59,23 @@ export class AnaliseEnemComponent implements OnInit {
   ngOnInit() {
   }
 
-  addEstadoGrafico(chart: Chart, label: string, data: number) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.push([data]);
-    });
-    chart.update();
+  addEstadoGrafico(label) {
+    const ESTADO = label.valueAccessor.value
+    this.api.getEscolasByEstado(ESTADO).subscribe(
+      escolas => {
+        let media = escolas[1].map(escola => {
+          if (escola.enemMediaGeral > 0) {
+            return escola.enemMediaGeral;
+          }
+        });
+
+        this.chart.data.labels.push(ESTADO);
+        this.chart.data.datasets.forEach((dataset) => {
+          dataset.data.push([Math.round(d3.mean(media))]);
+        });
+        this.chart.update();
+      });
+
   }
 
   removerEstadoGrafico(chart: Chart) {

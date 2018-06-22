@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AnaliseEnemComponent } from './analise-enem/analise-enem.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ChartsModule } from 'ng2-charts';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ChartsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
