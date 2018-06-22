@@ -1,5 +1,5 @@
 import { EducacaoDadosAPIService } from "./../service/educacao-dados-api.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import * as d3 from "d3";
 import { Chart } from 'chart.js';
 
