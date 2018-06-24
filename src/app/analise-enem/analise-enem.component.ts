@@ -10,6 +10,7 @@ import { Chart } from 'chart.js';
 })
 export class AnaliseEnemComponent implements OnInit {
   chart: Chart;
+  estadosNoGrafico = d3.set();
   tipoGrafico: string = 'bar';
   options = {
     responsive: true,
@@ -47,22 +48,22 @@ export class AnaliseEnemComponent implements OnInit {
         this.chart = new Chart('canvas', {
           type: this.tipoGrafico,
           data: {
-            labels: ['RN'],
             datasets: [{
               label: 'RN',
               data: [Math.round(d3.mean(media))],
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(255, 99, 132, 0.3)'
               ],
               borderWidth: 2,
               borderColor: [
                 'rgba(255,99,132,1)'
               ]
-            }
-            ]
+            }]
           },
           options: this.options
         });
+
+        this.estadosNoGrafico.add('RN');
       });
   }
 
@@ -70,29 +71,40 @@ export class AnaliseEnemComponent implements OnInit {
   }
 
   addEstadoGrafico(label) {
-    const ESTADO = label.valueAccessor.value
-    this.api.getEscolasByEstado(ESTADO).subscribe(
-      escolas => {
-        let media = escolas[1].map(escola => {
-          if (escola.enemMediaGeral > 0) {
-            return escola.enemMediaGeral;
+    const ESTADO = label.valueAccessor.value;
+    const COR_BARRA = this.gerarCorBarra();
+    console.log(!this.estadosNoGrafico.has(ESTADO));
+    if (!this.estadosNoGrafico.has(ESTADO)) {
+      this.api.getEscolasByEstado(ESTADO).subscribe(
+        escolas => {
+          let media = escolas[1].map(escola => {
+            if (escola.enemMediaGeral > 0) {
+              return escola.enemMediaGeral;
+            }
+          });
+
+          let newDataset = {
+            label: ESTADO,
+            data: [Math.round(d3.mean(media))],
+            borderWidth: 2,
+            backgroundColor: [
+              COR_BARRA[0]
+            ],
+            borderColor: [
+              COR_BARRA[1]
+            ]
           }
-        });
 
-        this.chart.data.labels.push(ESTADO);
-        this.chart.data.datasets.forEach((dataset) => {
-          dataset.data.push([Math.round(d3.mean(media))]);
+          this.chart.data.datasets.push(newDataset);
+          this.chart.update();
         });
-        this.chart.update();
-      });
-
+    }
   }
 
-  removerEstadoGrafico(chart: Chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-    });
-    chart.update();
+  gerarCorBarra(): string[] {
+    let r = Math.floor(Math.random()*256);
+    let g = Math.floor(Math.random()*256);
+    let b = Math.floor(Math.random()*256);
+    return [`rgba(${r},${g},${b},0.3)`, `rgba(${r},${g},${b},1)`];
   }
 }
