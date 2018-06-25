@@ -4,3 +4,13 @@
   position: relative;
   margin: auto;
 }
+body {
+  background: url(assets/img/background.jpg) fixed;
+  background-size: cover;
+}
+
+.back {
+  background: rgb(245, 245, 245, 0.9);
+  padding: 5%;
+  box-shadow: 0px 0px 31px 13px rgba(0,0,0,0.24);
+}

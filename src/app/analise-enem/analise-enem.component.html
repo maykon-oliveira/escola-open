@@ -3,7 +3,7 @@
     <div class="input-group mb-3">
       <div class="input-group">
         <select name="estado" ngModel #estado="ngModel">
-          <option value="AC">Acre</option>
+          <option value="AC" selected>Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>
           <option value="AM">Amazonas</option>
@@ -32,9 +32,13 @@
           <option value="TO">Tocantins</option>
         </select>
         <div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button" (click)="addEstadoGrafico(estado)">Adicionar</button>
+          <button class="btn btn-outline-primary" type="button" (click)="pesquisarEstado(estado)">Adicionar</button>
         </div>
       </div>
+    </div>
+
+    <div [hidden]="!erroMensagem" class="alert alert-danger" role="alert">
+      {{erroMensagem}}
     </div>
   </div>
 

@@ -10,6 +10,7 @@ import { Chart } from 'chart.js';
 })
 export class AnaliseEnemComponent implements OnInit {
   chart: Chart;
+  erroMensagem: string;
   estadosNoGrafico = d3.set();
   tipoGrafico: string = 'bar';
   options = {
@@ -70,10 +71,10 @@ export class AnaliseEnemComponent implements OnInit {
   ngOnInit() {
   }
 
-  addEstadoGrafico(label) {
+  pesquisarEstado(label) {
     const ESTADO = label.valueAccessor.value;
     const COR_BARRA = this.gerarCorBarra();
-    console.log(!this.estadosNoGrafico.has(ESTADO));
+
     if (!this.estadosNoGrafico.has(ESTADO)) {
       this.api.getEscolasByEstado(ESTADO).subscribe(
         escolas => {
@@ -83,25 +84,33 @@ export class AnaliseEnemComponent implements OnInit {
             }
           });
 
-          let newDataset = {
-            label: ESTADO,
-            data: [Math.round(d3.mean(media))],
-            borderWidth: 2,
-            backgroundColor: [
-              COR_BARRA[0]
-            ],
-            borderColor: [
-              COR_BARRA[1]
-            ]
-          }
-
-          this.chart.data.datasets.push(newDataset);
-          this.chart.update();
+          this.adicionarEstadoAoGrafico(ESTADO, [Math.round(d3.mean(media))], COR_BARRA);
         });
+
+      this.estadosNoGrafico.add(ESTADO);
+    } else {
+      this.erroMensagem = 'Escolha um estado que não esteja no gráfico.';
     }
   }
 
-  gerarCorBarra(): string[] {
+  private adicionarEstadoAoGrafico(estado, media, cor) {
+    if (media == 0) { this.erroMensagem = `${estado} não possui nota cadastrada`; return }
+    let novoDataset = {
+      label: estado,
+      data: media,
+      borderWidth: 2,
+      backgroundColor: [
+        cor[0]
+      ],
+      borderColor: [
+        cor[1]
+      ]
+    }
+    this.chart.data.datasets.push(novoDataset);
+    this.chart.update();
+  }
+
+  private gerarCorBarra(): string[] {
     let r = Math.floor(Math.random()*256);
     let g = Math.floor(Math.random()*256);
     let b = Math.floor(Math.random()*256);
