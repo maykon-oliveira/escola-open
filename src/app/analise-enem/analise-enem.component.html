@@ -1,5 +1,15 @@
-<div class="row" style="margin-top: 50px;">
-  <div class="col-md-4 col-sm-12 align-self-center" style="margin-top: 25px;">
+<h1 class="my-4"><small>Média das notas do ENEM</small></h1>
+
+<!-- conteudo -->
+<div class="row">
+  <!-- parte maior esquerda -->
+  <div class="col-md-8">
+    <div [hidden]="!chart" class="shadow p-3 mb-5 bg-light rounded chart-container">
+      <canvas id="canvas"></canvas>
+    </div>
+  </div>
+  <!-- parte menor direita -->
+  <div class="col-md-4">
     <div class="input-group mb-3">
       <div class="input-group">
         <select name="estado" ngModel #estado="ngModel">
@@ -32,18 +42,13 @@
           <option value="TO">Tocantins</option>
         </select>
         <div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button" (click)="pesquisarEstado(estado)">Adicionar</button>
+          <button class="btn bg-info text-light" type="button" (click)="pesquisarEstado(estado)">Adicionar</button>
         </div>
       </div>
     </div>
-
     <div [hidden]="!erroMensagem" class="alert alert-danger" role="alert">
-      {{erroMensagem}}
+      <p>{{erroMensagem}}</p>
     </div>
   </div>
 
-  <div [hidden]="!chart" class="col-md-8 col-sm-12 shadow p-3 mb-5 bg-light rounded chart-container" style="margin-top: 40px;">
-    <canvas id="canvas">
-    </canvas>
-  </div>
 </div>

@@ -22,10 +22,6 @@ export class AnaliseEnemComponent implements OnInit {
         }
       }]
     },
-    title: {
-      display: true,
-      text: 'Média das notas do ENEM das escolas do Brasil'
-    },
     legend: {
       display: true,
       position: 'right',
@@ -86,28 +82,34 @@ export class AnaliseEnemComponent implements OnInit {
 
           this.adicionarEstadoAoGrafico(ESTADO, [Math.round(d3.mean(media))], COR_BARRA);
         });
+        this.erroMensagem = null;
 
-      this.estadosNoGrafico.add(ESTADO);
     } else {
       this.erroMensagem = 'Escolha um estado que não esteja no gráfico.';
     }
   }
 
   private adicionarEstadoAoGrafico(estado, media, cor) {
-    if (media == 0) { this.erroMensagem = `${estado} não possui nota cadastrada`; return }
-    let novoDataset = {
-      label: estado,
-      data: media,
-      borderWidth: 2,
-      backgroundColor: [
-        cor[0]
-      ],
-      borderColor: [
-        cor[1]
-      ]
+    if (media[0] > 0) {
+      let novoDataset = {
+        label: estado,
+        data: media,
+        borderWidth: 2,
+        backgroundColor: [
+          cor[0]
+        ],
+        borderColor: [
+          cor[1]
+        ]
+      }
+      this.chart.data.datasets.push(novoDataset);
+      this.chart.update();
+      this.estadosNoGrafico.add(estado);
+
+    } else {
+      this.erroMensagem = `${estado} não possui nota cadastrada`;
     }
-    this.chart.data.datasets.push(novoDataset);
-    this.chart.update();
+
   }
 
   private gerarCorBarra(): string[] {
