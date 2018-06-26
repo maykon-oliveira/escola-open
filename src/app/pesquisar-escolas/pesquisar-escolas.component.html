@@ -1,0 +1,40 @@
+<h1 class="my-4">
+  <small>LIsta de escolas</small>
+</h1>
+
+<!-- conteudo -->
+<div class="row">
+  <!-- parte maior esquerda -->
+  <div class="col-lg-8">
+    <div *ngFor="let escola of listaEscolas , let i = index ">
+      <table>
+        <tr>
+          <th id="th1">indice </th>
+          <th id="th2">escola</th>
+          <th id="th3">codigo</th>
+          <th id="th4">tipo de escola</th>
+          <th id="th5">estado</th>
+        </tr>
+        <tr>
+          <td> {{i}} </td>
+          <td> {{ escola['nome']}} </td>
+          <td> {{ escola['cod']}} </td>
+          <td>{{ escola['dependenciaAdministrativaTxt']}} </td>
+          <td>{{ escola['estado']}}</td>
+        </tr>
+      </table>
+      <a href="../detalha-escola/detalha-escola.component.html" onClick="window.open('detalha-escola.component.html','pagename','resizable,height=260,width=370'); return false;">detalhe escola</a>
+    </div>
+  </div>
+  <!-- parte menor direita -->
+  <div class="col-lg-4">
+    <form #f="ngForm" (ngSubmit)="pesquisarEscola(f.form)" novalidate>
+      <input name="nome-escola" ngModel required #first="ngModel">
+      <button>Submit</button>
+    </form>
+    <div [hidden]="!erroMensagem" class="alert alert-danger" role="alert">
+      <p>{{erroMensagem}}</p>
+    </div>
+  </div>
+
+</div>
