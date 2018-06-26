@@ -6,11 +6,13 @@ import { AnaliseEnemComponent } from './analise-enem/analise-enem.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
+import { PesquisarEscolasComponent } from './pesquisar-escolas/pesquisar-escolas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnaliseEnemComponent
+    AnaliseEnemComponent,
+    PesquisarEscolasComponent
   ],
   imports: [
     BrowserModule,

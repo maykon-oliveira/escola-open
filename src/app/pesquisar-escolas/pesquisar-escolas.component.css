@@ -1,0 +1,29 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    
+}
+th {
+    background-color: gray;
+}
+table {
+    width: 100%;
+}
+#th1 {
+    width: 5%;
+}
+#th2 {
+    width: 50%;
+}
+#th3 {
+    width: 10%;
+}
+#th4 {
+    width: 10%;
+}
+#th5 {
+    width: 10%;
+}
+div {
+    text-align: center;
+}
