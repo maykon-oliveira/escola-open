@@ -28,10 +28,9 @@
   </div>
   <!-- parte menor direita -->
   <div class="col-lg-4">
-    <form>
-      <input type="text">
-      <button (click)="pesquisarEscola('presidente')">Pesquisar</button>
-
+    <form #f="ngForm" (ngSubmit)="pesquisarEscola(f.form)" novalidate>
+      <input name="nome-escola" ngModel required #first="ngModel">
+      <button>Submit</button>
     </form>
     <div [hidden]="!erroMensagem" class="alert alert-danger" role="alert">
       <p>{{erroMensagem}}</p>

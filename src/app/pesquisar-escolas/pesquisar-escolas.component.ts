@@ -14,13 +14,7 @@ export class PesquisarEscolasComponent implements OnInit {
   constructor(private api: EducacaoDadosAPIService) { }
 
   ngOnInit() {
-    this.api.getEscolasByNome('presidente').subscribe(
-
-      escolas => {
-        console.log('ok');
-        this.listaEscolas = escolas[1]
-        console.log('deu certo');
-      });
+    
   }
 
   codigoEscola(indice: number) {
@@ -32,9 +26,8 @@ export class PesquisarEscolasComponent implements OnInit {
     )
 
   }
-  pesquisarEscola(escola: string) {
-    console.log(escola);
-    this.api.getEscolasByNome(escola).subscribe(
+  pesquisarEscola(form) {
+   this.api.getEscolasByNome(form.value['nome-escola']).subscribe(
 
       escolas => {
         console.log('ok');
