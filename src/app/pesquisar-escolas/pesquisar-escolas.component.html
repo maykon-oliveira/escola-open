@@ -9,37 +9,46 @@
     <div *ngFor="let escola of listaEscolas , let i = index ">
 
       <div class="container">
-          <p>{{escola['nome']}} </p>
+          <p id="nameEscola">{{escola['nome']}} </p>
 
           <button type="button" (click)="detalhesEscola(i)" class="btn btn-info" data-toggle="collapse" attr.data-target="{{'#'+ i}}">Detalhes da escola</button>
           <div class="detalhes" id="{{i}}" class="collapse" >
               <table>
                   <tr>
-                    <th id="th1">Possui area Verde </th>
-                    <th id="th2"> Quantidade de computadores</th>
-                    <th id="th3">Possui auditorio</th>
-                    <th id="th4">tipo laboratorio Informatica escola</th>
+                    <th id="th1">Nome da escola </th>
+                    <th id="th2"> Cidade</th>
+                    <th id="th3">Tipo</th>
+                    <th id="th4">Situação</th>
 
                   </tr>
                   <tr>
-                    <td> {{ detalheEscola['areaVerde']}} </td>
-                    <td> {{ detalheEscola['computadores']}} </td>
-                    <td>{{ detalheEscola['auditorio']}} </td>
-                    <td>{{ detalheEscola['laboratorioInformatica']}}</td>
+                    <td> {{ detalheEscola['nome']}} </td>
+                    <td> {{ detalheEscola['nomeDistrito']}} </td>
+                    <td>{{ detalheEscola['dependenciaAdministrativaTxt']}} </td>
+                    <td>{{ detalheEscola['situacaoFuncionamentoTxt']}}</td>
                   </tr>
                   
                 </table>
+                <table>
+                    <tr>
+                      <th id="th1">Notas </th>
+                    </tr>
+                    <tr>
+                      <td>{{ detalheEscola['enemHumanas']}}</td>
+                    </tr>
+                  </table>
           </div>
 
         </div>
 
     </div>
   </div>
+    
   <!-- parte menor direita -->
   <div class="col-lg-4">
     <form #f="ngForm" (ngSubmit)="pesquisarEscola(f.form)" novalidate>
       <input name="nome-escola" ngModel required #first="ngModel">
-      <button>Submit</button>
+      <button>Pesquisar</button>
     </form>
     <div [hidden]="!erroMensagem" class="alert alert-danger" role="alert">
       <p>{{erroMensagem}}</p>
