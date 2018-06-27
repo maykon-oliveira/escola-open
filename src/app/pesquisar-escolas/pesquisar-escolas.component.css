@@ -1,7 +1,6 @@
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
-    
 }
 th {
     background-color: gray;
@@ -13,7 +12,7 @@ table {
     width: 5%;
 }
 #th2 {
-    width: 50%;
+    width: 20%;
 }
 #th3 {
     width: 10%;
@@ -26,4 +25,7 @@ table {
 }
 div {
     text-align: center;
+}
+tr {
+    background-color: lightslategray;
 }
