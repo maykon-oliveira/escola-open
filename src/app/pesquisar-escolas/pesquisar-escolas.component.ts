@@ -17,7 +17,7 @@ export class PesquisarEscolasComponent implements OnInit {
     
   }
 
-  codigoEscola(indice: number) {
+  detalhesEscola(indice: number) {
     this.api.getDetalheEscola(this.listaEscolas[indice]['cod']).subscribe(
       detalhes => {
         this.detalheEscola = detalhes
