@@ -1,35 +1,36 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+#th, #td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
-th {
-    background-color: #C0C0C0;
-
+#tabela{
+  float: left;
+}
+#th {
+  font-size: 0.8em;
+  background-color: gray;
 }
 table {
-    width: 80%;
-    left: 10%;
-    right: 10;
+  width: 100%;
 }
 #th1 {
-    width: 30%;
+  width: 5%;
 }
 #th2 {
-    width: 10%;
+  width: 20%;
+}
+#th3 {
+  width: 10%;
+}
+#th4 {
+  width: 10%;
+}
+#th5 {
+  width: 10%;
 }
 div {
-    text-align: center;
+  text-align: center;
 }
-tr {
-    background-color:#DCDCDC;
+#tr {
+  background-color: lightslategray;
 }
-#nameEscola {
-    border: 1px #A9A9A9;
-    background-color: #c4e3f3;
-}
-#titulo{
-    width: 100%;
-}
-#notaEnem {
-    width: 10%;
-}
+
