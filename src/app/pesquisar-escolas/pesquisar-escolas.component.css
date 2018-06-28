@@ -7,21 +7,14 @@ th {
 
 }
 table {
-    width: 100%;
+    width: 80%;
+    left: 10%;
+    right: 10;
 }
 #th1 {
     width: 30%;
 }
 #th2 {
-    width: 10%;
-}
-#th3 {
-    width: 10%;
-}
-#th4 {
-    width: 10%;
-}
-#th5 {
     width: 10%;
 }
 div {
@@ -33,4 +26,10 @@ tr {
 #nameEscola {
     border: 1px #A9A9A9;
     background-color: #c4e3f3;
+}
+#titulo{
+    width: 100%;
+}
+#notaEnem {
+    width: 10%;
 }

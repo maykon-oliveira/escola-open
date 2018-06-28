@@ -7,14 +7,24 @@ import { EducacaoDadosAPIService } from '../service/educacao-dados-api.service';
   styleUrls: ['./pesquisar-escolas.component.css']
 })
 export class PesquisarEscolasComponent implements OnInit {
-
+  erroMensagem: string;
   listaEscolas: any = []
   detalheEscola: any = []
 
   constructor(private api: EducacaoDadosAPIService) { }
 
   ngOnInit() {
-    
+
+  }
+  detalharEscola(indice: number) {
+    this.api.getDetalheEscola(this.listaEscolas[indice]['cod']).subscribe(
+      detalhes => {
+        console.log(detalhes)
+        return detalhes
+       
+      }
+    )
+
   }
 
   detalhesEscola(indice: number) {
