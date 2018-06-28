@@ -7,24 +7,68 @@
   <!-- parte maior esquerda -->
   <div class="col-lg-8">
     <div *ngFor="let escola of listaEscolas , let i = index ">
-      <div class="container">
-        <p>{{escola['nome']}} </p>
+      <div>
+        <table>
+        <tr>
+          <th  id="tabela">
+              {{escola['nome']}}
+          </th>
+          <th  style="float:right;">
+              <button type="button" (click)="detalhesEscola(i)" class="btn btn-info btn-sm" data-toggle="collapse" attr.data-target="{{'#'+ i}}">Detalhes</button>
+          </th>
+        </tr>
+      </table>
 
-        <button type="button" (click)="detalhesEscola(i)" class="btn btn-info" data-toggle="collapse" attr.data-target="{{'#'+ i}}">Detalhes da escola</button>
         <div class="detalhes" id="{{i}}" class="collapse">
-          <table>
-            <tr>
-              <th id="th1">Possui area Verde </th>
-              <th id="th2"> Quantidade de computadores</th>
-              <th id="th3">Possui auditorio</th>
-              <th id="th4">tipo laboratorio Informatica escola</th>
+          <table id="tabela">
+            <tr id="th">
+              <th id="th1 th">Dependencia Administrativa </th>
+              <th id="th2 th">Municipio</th>
+              <th id="th3 th">Estado</th>
+              <th id="th4 th">Ano do Censo</th>
             </tr>
-            <tr>
-              <td> {{ detalheEscola['areaVerde']}} </td>
-              <td> {{ detalheEscola['computadores']}} </td>
-              <td>{{ detalheEscola['auditorio']}} </td>
-              <td>{{ detalheEscola['laboratorioInformatica']}}</td>
+            <tr id="th">
+              <td id="td"> {{ detalheEscola['dependenciaAdministrativaTxt']}} </td>
+              <td id="td"> {{ detalheEscola['nomeMunicipio']}} </td>
+              <td id="td">{{ detalheEscola['siglaUf']}} </td>
+              <td id="td">{{ detalheEscola['anoCenso']}}</td>
             </tr>
+            <tr id="th">
+              <th id="th1 th">Possui Refeitorio </th>
+              <th id="th2 th">Possui Biblioteca</th>
+              <th id="th3 th">Possui Laboratório de Info</th>
+              <th id="th4 th">Possui Banda Larga</th>
+            </tr>
+            <tr id="th">
+              <td id="td" [ngStyle]="{'background-color': detalheEscola['refeitorio'] == true ? 'green' : 'red' }"> {{ detalheEscola['refeitorio']}} </td>
+              <td id="td" [ngStyle]="{'background-color': detalheEscola['biblioteca'] == true ? 'green' : 'red' }"> {{ detalheEscola['biblioteca']}} </td>
+              <td id="td" [ngStyle]="{'background-color': detalheEscola['laboratorioInformatica'] == true ? 'green' : 'red' }">{{ detalheEscola['laboratorioInformatica']}} </td>
+              <td id="td" [ngStyle]="{'background-color': detalheEscola['bandaLarga'] == true ? 'green' : 'red' }">{{ detalheEscola['bandaLarga']}}</td>
+            </tr>
+            <tr id="td">
+              <th id="td">Endereço</th>
+              <th id="td">Zona</th>
+              <th id="td">Indice SocioEconômico</th>
+              <th id="td">Região</th>
+            </tr>
+            <tr id="td">
+             <td id="td"> {{detalheEscola['endereco']}}</td>
+             <td id="td"> {{detalheEscola['tipoLocalizacaoTxt']}}</td>
+             <td id="td"> {{detalheEscola['socioEconomico']}}</td>
+             <td id="td"> {{detalheEscola['regiao']}}</td>
+            </tr>
+            <tr id="td">
+                <th id="td">Média Enem Humanas</th>
+                <th id="td">Média Enem Matemática</th>
+                <th id="td">Média Enem Naturais</th>
+                <th id="td">Média Enem Redação</th>
+            </tr>
+            <tr id="td">
+                <td id="td"> {{detalheEscola['enemHumanas']}}</td>
+                <td id="td"> {{detalheEscola['enemMatematica']}}</td>
+                <td id="td"> {{detalheEscola['enemNaturais']}}</td>
+                <td id="td"> {{detalheEscola['enemRedacao']}}</td>
+               </tr>
           </table>
         </div>
       </div>

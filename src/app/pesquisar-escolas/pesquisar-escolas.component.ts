@@ -8,8 +8,8 @@ import { EducacaoDadosAPIService } from '../service/educacao-dados-api.service';
 })
 export class PesquisarEscolasComponent implements OnInit {
   erroMensagem: string;
-  listaEscolas: any = []
-  detalheEscola: any = []
+  listaEscolas: any = [];
+  detalheEscola: any = [];
 
   constructor(private api: EducacaoDadosAPIService) { }
 
@@ -20,10 +20,10 @@ export class PesquisarEscolasComponent implements OnInit {
   detalhesEscola(indice: number) {
     this.api.getDetalheEscola(this.listaEscolas[indice]['cod']).subscribe(
       detalhes => {
-        this.detalheEscola = detalhes
-        console.log(this.detalheEscola)
+        this.detalheEscola = detalhes;
+        console.log(this.detalheEscola);
       }
-    )
+    );
 
   }
   pesquisarEscola(form) {
@@ -31,7 +31,7 @@ export class PesquisarEscolasComponent implements OnInit {
 
       escolas => {
         console.log('ok');
-        this.listaEscolas = escolas[1]
+        this.listaEscolas = escolas[1];
         console.log('deu certo');
       });
   }

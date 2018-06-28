@@ -1,31 +1,36 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+#th, #td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
-th {
-    background-color: gray;
+#tabela{
+  float: left;
+}
+#th {
+  font-size: 0.8em;
+  background-color: gray;
 }
 table {
-    width: 100%;
+  width: 100%;
 }
 #th1 {
-    width: 5%;
+  width: 5%;
 }
 #th2 {
-    width: 20%;
+  width: 20%;
 }
 #th3 {
-    width: 10%;
+  width: 10%;
 }
 #th4 {
-    width: 10%;
+  width: 10%;
 }
 #th5 {
-    width: 10%;
+  width: 10%;
 }
 div {
-    text-align: center;
+  text-align: center;
 }
-tr {
-    background-color: lightslategray;
+#tr {
+  background-color: lightslategray;
 }
+
